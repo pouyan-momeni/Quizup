@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="googlebot" content="index,follow">
+
+
+
+    <!-- Title -->
+    <title>امتحانک | کوییز</title>
+
+
+    <link href="/static/stylesheets/application.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/style.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+	<!-- bootstrap -->
+    <link rel="stylesheet" href="/static/css/bootstrap-rtl.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/bootstrap-responsive-rtl.css" type="text/css" />
+
+    <link rel="stylesheet" href="/static/css/style-site.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/style-farsi.css" type="text/css" />
+    <link rel="stylesheet" href="/static/css/result_page.css" type="text/css" />
+
+    <!-- Favicons -->
+    <link href="/static/images/favicon/favicon.png" rel="shortcut icon">
+    <link href="/static/images/favicon/apple-touch-icon-57-precomposed.png" rel="apple-touch-icon">
+    <link href="/static/images/favicon/apple-touch-icon-72-precomposed.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="/static/images/favicon/apple-touch-icon-144-precomposed.png" rel="apple-touch-icon" sizes="114x114">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Modernizr Scripts -->
+    <script src="/static/javascript/vendor/modernizr-2.7.1.min.js"></script>
+
+
+
+
+
+
+<!-- animate.css -->
+<link rel="stylesheet" href="/static/assets/animate/animate.css" />
+<link rel="stylesheet" href="/static/assets/animate/set.css" />
+
+<!-- gallery -->
+<link rel="stylesheet" href="/static/assets/gallery/blueimp-gallery.min.css">
+
+<!-- favicon -->
+<link rel="shortcut icon" href="/static/images/favicon.jpg" type="image/x-icon">
+<link rel="icon" href="/static/images/favicon.jpg" type="image/x-icon">
+
+
+
+
+</head>
+<body class="sign-in-up" id="to-top">
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Quizdown</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      {% block navbar_control %}
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/questions">خانه <span class="sr-only">(current)</span></a></li>
+	    <li><a href="/questions/categories">دسته‌بندی‌ها</a></li>
+	    <li><a href="/questions/ranking">رتبه‌ی کاربران</a></li>
+          <li><a href="/questions/ranking">امتحانک </a></li>
+
+       </ul>
+      {% endblock %}
+      <ul class="nav navbar-nav">
+        <li><a href="/accounts/logout">خروج از سیستم</a></li>
+       </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+    <!-- Sign In/Sign Up section -->
+    <section class="sign-in-up-section">
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-12">
+
+          </div> <!-- /.col-md-12 -->
+
+        </div> <!-- /.row -->
+
+
+
+        {% block site_content %}
+        <section class="sign-in-up-content">
+
+          <div class="row">
+
+            <div class="col-md-12">
+
+              <h4 class="text-center">ایجاد سوال جدید</h4>
+
+              <form class="sign-in-up-form" action="." method="post" role="form">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      <label for="question-text">متن سوال</label>
+                      <input id="question-text" class="form-control" type="text" name="question_text">
+                  </div>
+                  <div class="form-group">
+                      <label for="a">الف</label>
+                      <input id="a" class="form-control" type="text" name="a">
+                      <input type="checkbox" name="a_is_correct">
+                  </div>
+                  <div class="form-group">
+                      <label for="b">ب</label>
+                      <input id="b" class="form-control" type="text" name="b">
+                      <input type="checkbox" name="b_is_correct">
+                  </div>
+                  <div class="form-group">
+                      <label for="c">پ</label>
+                      <input id="c" class="form-control" type="text" name="c">
+                      <input type="checkbox" name="c_is_correct">
+                  </div>
+                  <div class="form-group">
+                      <label for="d">ت</label>
+                      <input id="d" class="form-control" type="text" name="d">
+                      <input type="checkbox" name="d_is_correct">
+                  </div>
+                  <div class="form-group">
+                      {{form.categories}}
+                  </div>
+                  <div class="form-group">
+                      <input class="button-success" type="submit" value="اضافه کردن">
+                  </div>
+              </form>
+
+            </div> <!-- /.col-md-12 -->
+
+          </div> <!-- /.row -->
+
+        </section> <!-- /.sign-in-up-content -->
+        {% endblock %}
+
+
+      </div> <!-- /.container -->
+
+    </section> <!-- /.sign-in-up-section -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/javascript/vendor/jquery-2.1.0.min.js"></script>
+    <script src="/static/javascript/bootstrap.min.js"></script>
+    <script src="/static/javascript/assets/application.js"></script>
+  </body>
+</html>

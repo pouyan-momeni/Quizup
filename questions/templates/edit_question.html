@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block navbar_control %}
+  <ul class="nav navbar-nav">
+  	<li><a href="/index/">خانه</a></li>
+    <li class="active"><a href="/questions/categories">دسته‌بندی‌ها</a></li>
+    <li><a href="/questions/ranking">رتبه‌ی کاربران</a></li>
+    <li><a href="/quiz/">کوییز</a></li>
+   </ul>
+{% endblock %}
+
+{% block site_content %}
+	<div class="qu_side_menu">
+	<div class="row">
+		<div class="col-md-7">
+
+        <section class="sign-in-up-content">
+
+          <div class="row">
+
+            <div class="col-md-12">
+			{% if done %}
+				<div class="alert alert-success" dir="rtl">
+					سوال با موفقیت به روزرسانی شد.
+				</div>
+			{% endif %}
+
+              <h4 class="text-center">به روزرسانی سوال</h4>
+
+              <form class="sign-in-up-form" action="/questions/edit_question/{{showing_id}}" method="post" role="form">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      <label for="question-text">متن سوال</label>
+                      <input id="question-text" class="form-control" type="text" name="question_text" value="{{ question.question }}">
+                  </div>
+                  <div class="form-group">
+                      <label for="a">الف</label>
+                      <input id="a" class="form-control" type="text" name="a" value="{{ options.0.text }}">
+                      <input type="checkbox" name="a_is_correct" {% if options.0.is_correct %} checked {% endif %}>
+                  </div>
+                  <div class="form-group">
+                      <label for="b">ب</label>
+                      <input id="b" class="form-control" type="text" name="b" value="{{ options.1.text }}">
+                      <input type="checkbox" name="b_is_correct" {% if options.1.is_correct %} checked {% endif %}>
+                  </div>
+                  <div class="form-group">
+                      <label for="c">پ</label>
+                      <input id="c" class="form-control" type="text" name="c" value="{{ options.2.text }}">
+                      <input type="checkbox" name="c_is_correct" {% if options.2.is_correct %} checked {% endif %}>
+                  </div>
+                  <div class="form-group">
+                      <label for="d">ت</label>
+                      <input id="d" class="form-control" type="text" name="d" value="{{ options.3.text }}">
+                      <input type="checkbox" name="d_is_correct" {% if options.3.is_correct %} checked {% endif %}>
+                  </div>
+                  <div class="form-group">
+                      {{form.categories}}
+                  </div>
+                  <div class="form-group">
+                      <input class="button-success" type="submit" value="ذخیره ی تغییرات">
+                  </div>
+                  {% if form.errors %}
+				    {% for field in form %}
+				        {% for error in field.errors %}
+				            <div class="alert alert-error">
+				                <strong>{{ error|escape }}</strong>
+				            </div>
+				        {% endfor %}
+				    {% endfor %}
+				    {% for error in form.non_field_errors %}
+				        <div class="alert alert-error">
+				            <strong>{{ error|escape }}</strong>
+				        </div>
+				    {% endfor %}
+				  {% endif %}
+              </form>
+
+            </div> <!-- /.col-md-12 -->
+
+          </div> <!-- /.row -->
+
+        </section> <!-- /.sign-in-up-content -->
+	    </div>
+		<div class="col-md-1">
+                <ul id="right-side-menu" class="nav side-bar">
+                    <li class="right-menu-item">
+                        <li class="active right-menu-item"><a href="/questions/category/{{category.id}}">{{category.name}}</a></li>
+                    </li>
+    				<li class="active right-menu-item">
+                        <a href="/questions/add_question/{{showing_id}}">ایجاد سوال</a>
+                    </li>
+                </ul>
+		</div>
+    </div>
+    </div>
+{% endblock %}

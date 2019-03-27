@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block navbar_control %}
+  <ul class="nav navbar-nav">
+  	<li><a href="/index/">خانه</a></li>
+    <li><a href="/questions/categories">دسته‌بندی‌ها</a></li>
+    <li class="active"><a href="/questions/ranking">رتبه‌ی کاربران<span class="sr-only">(current)</span></a></li>
+    <li><a href="/quiz/">کوییز</a></li>
+   </ul>
+{% endblock %}
+
+{% block site_content %}
+	<div class="qu_side_menu">
+	<div class="row">
+		<div class="col-md-7">
+
+        <section class="sign-in-up-content">
+		
+          <div class="row">
+
+            <div class="col-md-12">
+
+              <h4 class="text-center">سه کاربر برتر در دسته‌بندی: {{category}}</h4>
+			  <div class="score-section">
+			  	{% for top_user in top_users %}
+			  		{{top_user.0}} با امتیاز {{top_user.1}}
+			  		</br>
+			  	{% endfor %}
+			  </div>
+
+			  </br>
+              <h4 class="text-center">وضعیت شما در درسته‌بندی: {{category}}</h4>
+			  <div class="score-section">
+			  	رتبه‌ی {{user_rank}} با امتیاز {{user_score}}
+			  </div>
+
+            </div> <!-- /.col-md-12 -->
+
+          </div> <!-- /.row -->
+
+        </section> <!-- /.sign-in-up-content -->
+	    </div>
+		<div class="col-md-1">
+		</div>
+    </div>
+    </div>
+{% endblock %}

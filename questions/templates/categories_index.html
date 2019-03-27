@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block navbar_control %}
+<ul class="nav navbar-nav">
+  	<li><a href="/index/">خانه</a></li>
+    <li class="active"><a href="/questions/categories">دسته‌بندی‌ها<span class="sr-only">(current)</span></a></li>
+    <li><a href="/questions/ranking">رتبه‌ی کاربران</a></li>
+    <li><a href="/quiz/">کوییز</a></li>
+</ul>
+{% endblock %}
+
+{% block site_content %}
+<div class="qu_side_menu">
+    <div class="row">
+        <div class="col-md-7">
+
+            <section class="sign-in-up-content">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="text-right"><a href="/questions/ranking/{{showing_id}}">برترین افراد این دسته‌بندی</a></div>
+                        <div class="text-right"><a href="/questions/add_question/{{showing_id}}">اضافه کردن سوال به این دسته‌بندی</a></div>
+                        </br>
+
+                        <h4 class="text-center">سوال‌های این دسته‌بندی</h4>
+                        <br/>
+			    	{% if questions %}
+			        <table id="questions" class="responsive-table table table-bordered table-striped media">
+			                <thead>
+	                            <tr>
+	                                <th>ویرایش</th>
+	                                <th>حذف</th>
+	                                <th>پاسخ درست</th>
+	                                <th>سازنده سوال</th>
+	                                <th>دسته‌بندی</th>
+	                                <th>صورت سوال</th>
+	                            </tr>
+			                </thead>
+			                <tbody>
+	                        {% for question, option in options %}
+	                            <tr>
+	                                <td>
+	                                    <form id="edit_form" method="post" action="/questions/category/{{showing_id}}" role="form">
+	                                        {% csrf_token %}
+	                                        <input type="hidden" name="question" value="{{ question.question }}">
+	                                        <input type="hidden" name="category" value="{{ question.category.name }}">
+	                                        <input name="action" type="submit" value="ویرایش" class="btn-info"/>
+	                                    </form>
+	                                </td>
+	                                <td>
+	                                    <form id="remove_form" method="post" action="/questions/category/{{showing_id}}" role="form">
+	                                        {% csrf_token %}
+	                                        <input type="hidden" name="question" value="{{ question.question }}">
+	                                        <input type="hidden" name="category" value="{{ question.category.name }}">
+	                                        <input name="action" type="submit" value="حذف" class="btn-danger"/>
+	                                    </form>
+	                                </td>
+	                                <td>
+				                    	{{option.text}}
+				                    </td>
+	                                <td>
+		                                {{question.creator}}
+				                    </td>
+	                                <td>
+										{{question.category.name}}
+				                    </td>
+	                                <td>
+			                        	{{question.question }}
+			                    	</td>
+	                            </tr>
+	                        {% endfor %}
+			                </tbody>
+			        </table>
+			        {% endif %}
+                    </div>
+                    <!-- /.col-md-12 -->
+
+                </div>
+                <!-- /.row -->
+
+            </section>
+            <!-- /.sign-in-up-content -->
+        </div>
+        <div class="col-md-1">
+            <ul id="right-side-menu" class="nav side-bar">
+        	دسته‌بندی‌ها:
+        	</br>
+                {% for category in categories %}
+	                <li class="{% if showing_id == category.id %} active {% endif %}right-menu-item">
+	                    <a href="/questions/category/{{category.id}}">{{category.name}}</a>
+	                </li>
+                {% endfor %}
+            
+                <a href="/questions/add_category">ایجاد دسته‌بندی</a>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

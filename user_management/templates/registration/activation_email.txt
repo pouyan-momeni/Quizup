@@ -1,0 +1,7 @@
+
+ممنون از شما بابت ثبت نام در {{ site.domain }}.
+برای فعال سازی حساب کاربری خود در سایت ما برای روی لینک زیر کلیک کنید.
+
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+
+این لینک {{ expiration_days }} روز اعتبار دارد.

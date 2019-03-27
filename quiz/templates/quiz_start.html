@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block navbar_control %}
+<ul class="nav navbar-nav">
+    <li><a href="/questions">خانه <span >(current)</span></a></li>
+    <li><a href="/questions/categories/">دسته بندی ها</a></li>
+    <li><a href="/questions/ranking/">رتبه کاربران</a></li>
+    <li><a class="active" href="/quiz/">کوییز</a></li>
+</ul>
+{% endblock %}
+
+{% block site_content %}
+
+<section class="sign-in-up-content">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <br/>
+            <form class="sign-in-up-form" action="." method="post" role="form">
+                {% csrf_token %}
+
+                {% if question%}
+
+                <h2 class="text-center">{{question.question }} </h2>
+
+                <table id="quiz-selection" class="responsive-table table table-bordered table-striped media">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+                    <form>
+                    <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="radio" name="selected" value="1">
+                            {{option_a.text}}
+                        </div>
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="radio" name="selected" value="2">
+                            {{option_b.text}}
+                        </div>
+                    </td>
+                    </tr>
+
+                    <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="radio" name="selected" value="3">
+                            {{option_c.text}}
+                        </div>
+                    </td>
+                    </tr>
+
+
+                    <tr>
+                    <td>
+                        <div class="form-group">
+                            <input type="radio" name="selected" value="4">
+                            {{option_d.text}}
+                        </div>
+                    </td>
+                    </tr>
+
+                </form>
+
+
+                    </tbody>
+                </table>
+
+                <input class="btn btn-block" type="submit" value="بعدی">
+                {% else %}
+                <input class="btn btn-block" type="submit" value="شروع">
+                {% endif %}
+            </form>
+
+
+
+
+
+
+        </div> <!-- /.col-md-12 -->
+
+    </div> <!-- /.row -->
+
+</section> <!-- /.sign-in-up-content -->
+{% endblock %}

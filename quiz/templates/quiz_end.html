@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block navbar_control %}
+<ul class="nav navbar-nav">
+    <li><a href="/index/">خانه</a></li>
+    <li><a href="/questions/categories/">دسته بندی ها</a></li>
+    <li><a href="/questions/ranking/">رتبه کاربران</a></li>
+    <li><a href="/quiz/">کوییز</a></li>
+
+</ul>
+{% endblock %}
+
+{% block site_content %}
+
+
+    <div class="row">
+        <div class="col-md-12 banner">
+            <h1 class="result">{{ resault }}</h1>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-md-5">
+<!-- Slider Starts -->
+            <div class="banner">
+              <div class="caption">
+                <div class="caption-wrapper">
+                  <div class="caption-info">
+                    <img src="/static/images/profile.jpg" class="img-circle profile">
+                    <h1 class="animated bounceInLeft">{{ score1 }}</h1>
+                    <h3 class="animated bounceInUp">{{ username1 }}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-2 banner">
+            <h1 class="animated bounceInLeft vs">VS</h1>
+        </div>
+        <div class="col-md-5">
+<!-- Slider Starts -->
+            <div class="banner">
+              <div class="caption">
+                <div class="caption-wrapper">
+                  <div class="caption-info">
+                    <img src="/static/images/profile.jpg" class="img-circle profile">
+                    <h1 class="animated bounceInLeft">{{ score2 }}</h1>
+                    <h3 class="animated bounceInUp">{{ username2 }}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        </div> <!-- /.col-md-12 -->
+
+    </div> <!-- /.row -->
+
+</section> <!-- /.sign-in-up-content -->
+{% endblock %}

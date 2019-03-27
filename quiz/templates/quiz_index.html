@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block navbar_control %}
+<ul class="nav navbar-nav">
+    <li><a href="/index/">خانه</a></li>
+    <li><a href="/questions/categories/">دسته بندی ها</a></li>
+    <li><a href="/questions/ranking/">رتبه کاربران</a></li>
+    <li><a class="active" href="/quiz/">کوییز</a></li>
+</ul>
+{% endblock %}
+
+{% block site_content %}
+
+<section class="sign-in-up-content">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <h3 class="text-center">
+                موضوع را انتخاب کنید
+            </h3></br>
+            {%if form%}
+            <form class="sign-in-up-form" action="." method="post" role="form">
+                {% csrf_token %}
+
+            <div class="form-group">
+                {{form.categories}}
+            </div>
+
+
+                <input class="btn btn-block" type="submit" value="امتحانک بساز">
+                </form>
+
+            {%if error_message%}
+                <div>
+                <h6> {{error_message}}</h6>
+                </div>
+            {%endif%}
+
+            {% endif %}
+
+
+
+        </div> <!-- /.col-md-12 -->
+
+    </div> <!-- /.row -->
+
+</section> <!-- /.sign-in-up-content -->
+{% endblock %}
